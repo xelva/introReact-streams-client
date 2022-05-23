@@ -5,7 +5,8 @@ import {
     FETCH_STREAM,
     FETCH_STREAMS,
     EDIT_STREAM,
-    DELETE_STREAM
+    DELETE_STREAM,
+    STREAM_LOADED
     } from './types';
 import streams from '../apis/streams';
 import history from '../history';
@@ -38,6 +39,7 @@ export const fetchStreams = () => async dispatch => {
 export const fetchStream = (id) => async dispatch => {
     const response = await streams.get(`/streams/${id}`);
     dispatch({ type: FETCH_STREAM, payload: response.data})
+    dispatch(streamLoaded());
 }
 
 export const editStream = (id, formValues) => async dispatch => {
@@ -51,3 +53,9 @@ export const deleteStream = (id) => async dispatch => {
     dispatch({ type: DELETE_STREAM, payload: id})
     history.push('/')
 }
+
+export const streamLoaded = () => {
+    return {
+        type: STREAM_LOADED,
+    };
+};
