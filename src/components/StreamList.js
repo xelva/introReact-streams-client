@@ -12,13 +12,12 @@ const StreamList = ({ streams, currentUserId, isSignedIn, fetchStreams }) => {
         if (stream.userId === currentUserId) {
             return (
                 <div className="right floated content">
-                    <button className="ui button primary">EDIT</button>
-                    <button className="ui button negative">DELETE</button>
+                    <Link to={`/edit/${stream.id}`} className="ui button primary">EDIT</Link>
+                    <Link to={`/delete/${stream.id}`} className="ui button negative">DELETE</Link>
                 </div>
             )
         }
     }
-
 
     const renderList = () => {
         return streams.map(stream => {
@@ -27,7 +26,7 @@ const StreamList = ({ streams, currentUserId, isSignedIn, fetchStreams }) => {
                     {renderAdmin(stream)}
                     <i className="large middle aligned icon camera" />
                     <div className="content">
-                        {stream.title}
+                        <Link to={`/show/${stream.id}`}>{stream.title}</Link>
                         <div className="description">{stream.description}</div>
                     </div>
                     
@@ -40,7 +39,7 @@ const StreamList = ({ streams, currentUserId, isSignedIn, fetchStreams }) => {
         if (isSignedIn) {
             return (
                 <div style={{ textAlign: 'right' }}>
-                    <Link to="/streams/new" className="ui button primary">
+                    <Link to="/new" className="ui button primary">
                         Create
                     </Link>
                 </div>

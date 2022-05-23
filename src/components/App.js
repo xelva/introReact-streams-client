@@ -1,27 +1,29 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-
+import { Router, Route, Switch } from 'react-router-dom';
 import StreamCreate from './StreamCreate';
 import StreamDelete from './StreamDelete';
 import StreamEdit from './StreamEdit';
 import StreamList from './StreamList';
 import StreamShow from './StreamShow';
 import Header from './Header';
+import history from '../history';
 
 
 const App = () => {
     return (
         <div>
-            <BrowserRouter>
+            <Router history={history}>
                 <div>
                     <Header />
-                    <Route path="/" exact component={StreamList}/>
-                    <Route path="/new" component={StreamCreate}/>
-                    <Route path="/edit" component={StreamEdit}/>
-                    <Route path="/delete" component={StreamDelete}/>
-                    <Route path="/show" component={StreamShow}/>
+                    <Switch>
+                        <Route path="/" exact component={StreamList}/>
+                        <Route path="/new" component={StreamCreate}/>
+                        <Route path="/edit/:id" component={StreamEdit}/>
+                        <Route path="/delete/:id" component={StreamDelete}/>
+                        <Route path="/show/:id" component={StreamShow}/>
+                    </Switch>
                 </div>
-            </BrowserRouter>
+            </Router>
         </div>
     )
 }
